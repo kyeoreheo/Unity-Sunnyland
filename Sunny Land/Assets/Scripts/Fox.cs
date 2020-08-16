@@ -12,8 +12,8 @@ public class Fox : MonoBehaviour
     public float speed;
     public float jumpSpeed;
     public int score;
-    public bool isOnRightWall;
-    public bool isOnLeftWall;
+    public bool isOnWall;
+    public bool isMovingRight;
 
     private Animator myAnimator;
     private Rigidbody2D myBody;
@@ -22,8 +22,8 @@ public class Fox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isOnRightWall = false;
-        isOnLeftWall = false;
+        isMovingRight = false;
+        isOnWall = false;
         isOnGround = false;
         myAnimator = this.gameObject.GetComponent<Animator>();
         myBody = this.gameObject.GetComponent<Rigidbody2D>();
@@ -39,8 +39,9 @@ public class Fox : MonoBehaviour
             myAnimator.Play("Player_idle", 0);
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow) && !isOnRightWall)
+        if (Input.GetKey(KeyCode.LeftArrow) && !(isOnWall && !isMovingRight))
         {
+            isMovingRight = false;
             this.gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
             myBody.velocity = new Vector2(-speed, myBody.velocity.y);
             if (isOnGround)
@@ -48,8 +49,9 @@ public class Fox : MonoBehaviour
                 myAnimator.Play("Player_Run", 0);
             }
         }
-        if (Input.GetKey(KeyCode.RightArrow) && !isOnLeftWall)
+        if (Input.GetKey(KeyCode.RightArrow) && !(isOnWall && isMovingRight))
         {
+            isMovingRight = true;
             this.gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
             myBody.velocity = new Vector2(speed, myBody.velocity.y);
             if (isOnGround)

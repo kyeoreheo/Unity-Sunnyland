@@ -24,14 +24,7 @@ public class SideArea : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             FoxRigid.velocity = new Vector2(0, FoxRigid.velocity.y);
-            if(this.gameObject.tag == "Left")
-            {
-                Fox.isOnLeftWall = true;
-            }
-            if (this.gameObject.tag == "Right")
-            {
-                Fox.isOnRightWall = true;
-            }
+            Fox.isOnWall = true;
         }
     }
     private void OnCollisionExit2D(Collision2D other)
@@ -39,14 +32,7 @@ public class SideArea : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             FoxRigid.velocity = new Vector2(0, FoxRigid.velocity.y);
-            if (this.gameObject.tag == "Left")
-            {
-                Fox.isOnLeftWall = false;
-            }
-            if (this.gameObject.tag == "Right")
-            {
-                Fox.isOnRightWall = false;
-            }
+            Fox.isOnWall = false;
         }
     }
 }
