@@ -11,7 +11,7 @@ public class Fox : MonoBehaviour
     public Text scoreText;
     public float speed;
     public float jumpSpeed;
-    public int score;
+    public int cherryPoints;
     public bool isOnWall;
     public bool isMovingRight;
 
@@ -27,7 +27,7 @@ public class Fox : MonoBehaviour
         isOnGround = false;
         myAnimator = this.gameObject.GetComponent<Animator>();
         myBody = this.gameObject.GetComponent<Rigidbody2D>();
-        scoreText.text = score.ToString();
+        scoreText.text = cherryPoints.ToString();
         myPosition = this.gameObject.transform.position;
     }
 
@@ -84,8 +84,8 @@ public class Fox : MonoBehaviour
     {
         if (other.gameObject.tag == "Item")
         {
-            score++;
-            scoreText.text = score.ToString();
+            cherryPoints++;
+            scoreText.text = cherryPoints.ToString();
             Destroy(other.gameObject);
         }
     }
